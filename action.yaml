@@ -13,6 +13,10 @@ inputs:
     description: 'What test command to run'
     required: false
     default: 'go test'
+  go-version:
+    description: 'Version of golang to install'
+    required: false
+    default: '1.17.x'
   test-working-directory:
     description: 'Directory to run tests from'
     required: false
@@ -92,7 +96,7 @@ runs:
       if: hashFiles('app/go.mod') != '' # rudimentary file existence check
       uses: actions/setup-go@v2
       with:
-        go-version: '1.17.x'
+        go-version: ${{ inputs.go-version }}
     - name: Setup Go Cache
       if: hashFiles('app/go.mod') != '' # rudimentary file existence check
       uses: actions/cache@v2
